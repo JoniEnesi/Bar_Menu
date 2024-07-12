@@ -1,0 +1,15 @@
+<div class="toggler_menu">
+    <a href="{% url 'home' %}" class="toggler_item">
+        <p style="cursor: pointer; display: grid; justify-items: center"><i class="fa-solid fa-clipboard-list"></i>Menu</p>
+    </a>
+    <a href="{% url 'offer' %}" class="toggler_item">
+        <p style="cursor: pointer; display: grid; justify-items: center"><i class="fa-solid fa-tags"><p data-lang data-lang-al="Oferta" data-lang-en="Offer"></p></i></p>
+    </a>
+    <a class="toggler_item" onclick="togglePopup()">
+        <p style="cursor: pointer; display: grid; justify-items: center"><i class="fa-solid fa-circle-info"></i>Info</p>
+    </a>
+    <a class="toggler_item" id="add" href="{% url 'cart_views' %}" style="justify-items: normal">
+        <p style="cursor: pointer; display: grid; justify-items: center"><i class="fa-solid fa-cart-shopping"><p data-lang data-lang-al="Fatura" data-lang-en="Order"></p></i></p>
+        <span class="pro-count cart-items-count">{{ request.session.cart_data_obj|length }}</span>
+    </a>
+</div>

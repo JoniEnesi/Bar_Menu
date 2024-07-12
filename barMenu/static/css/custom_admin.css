@@ -1,0 +1,33 @@
+picture > img{
+    width: 30%;
+}
+
+.timeline,
+.module > h4{
+    display: none;
+}
+
+.field-view_order,
+.field-is_paid{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.even > .field-is_paid > input[type="checkbox"],
+.odd > .field-is_paid > input[type="checkbox"],
+.even > .field-view_order > input[type="checkbox"],
+.odd > .field-view_order > input[type="checkbox"]{
+    width: 20%;
+    height: 20px;
+}
+
+.field-__str__{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table td, .table th {
+    vertical-align: baseline;
+}

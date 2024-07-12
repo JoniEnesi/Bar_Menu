@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+{% for message in messages %}
+    {% if language == 'en' %}
+      {% if message.tags == 'warning' %}
+        <script>
+          Swal.fire({
+              icon: "info",
+              title: '{{ message }}',
+              confirmButtonText: "<i class=\"fa-regular fa-circle-check\"></i>",
+          })
+          </script>
+      {% endif %}
+    {% else %}
+      {% if message.tags == 'error' %}
+        <script>
+          Swal.fire({
+              icon: "info",
+              title: '{{ message }}',
+              confirmButtonText: "<i class=\"fa-regular fa-circle-check\"></i>",
+          })
+        </script>
+      {% endif %}
+    {% endif %}
+{% endfor %}
+
+<div class="container-fluid container_bg">
+    <div class="container_item mt-5 mb-5" id="content-container">
+        <div class="category-head">
+            <h4>Menu</h4>
+        </div>
+        <div class="row">
+            {% for category in categories %}
+                <div class="col-12 col-md-6 col-lg-6 mb-5">
+                    <div class="menu_item">
+                        <a href="{% url 'category' category.slug %}" class="inside_menu">
+                            <img src="{{ category.images.url }}" alt="image">
+                            {% if language == 'en' %}
+                                <p>{{ category.category_name_en }}</p>
+                            {% else %}
+                                <p>{{ category.category_name_al }}</p>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

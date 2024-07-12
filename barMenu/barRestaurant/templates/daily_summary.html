@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Summary</title>
+</head>
+<body style="display: flex;flex-direction: column;align-items: center;">
+    <h1>Daily Summary for {{ date }}</h1>
+    {% if summary %}
+        <h2>Total Sales: {{ summary.total_sales }} Lek</h2>
+        <h3>Products:</h3>
+        <ul style="font-size: 20px">
+            {% for product, qty in summary.products.items %}
+                <li>{{ qty }} - {{ product }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sales recorded for today.</p>
+    {% endif %}
+
+    <a style="text-decoration: none;" href="http://127.0.0.1:8000/admin/barRestaurant/dailysummary/">
+        <button style="cursor: pointer; border:0; color: #fff; width: 100px; height: 40px; font-size: 18px; padding-left: 10px; background-color: #007bff; border-radius: 5px;">Back</button>
+    </a>
+</body>
+</html>

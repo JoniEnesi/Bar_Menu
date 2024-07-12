@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+{% for message in messages %}
+  {% if message.tags == 'success' %}
+    <script>
+      Swal.fire({
+          title: '{{ message }}',
+          confirmButtonText: "<i class=\"fa-regular fa-circle-check\"></i>",
+          customClass: {
+              popup: 'table_msg',
+          }
+      })
+      </script>
+  {% endif %}
+{% endfor %}
+
+<div class="container-fluid table-bg">
+  <form method="post">
+    {% csrf_token %}
+    <div class="table-options">
+      <p style="color: #000; font-size: 15px; font-weight: bold;">Ju lutem shkruani numrin e tavolines ku jeni ulur (1-30)...<br>( Please write the number of table you are sitting at (1-30)... )</p>
+      <input type="number" name="table" placeholder="1" class="table-nr mt-3">
+    </div>
+    <button type="submit" class="table-btn"><i class="fa-regular fa-circle-check"></i></button>
+  </form>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const tableInput = document.querySelector('.table-nr');
+      const tableValue = parseInt(tableInput.value);
+
+      if (tableValue >= 1 && tableValue <= 30) {
+        form.submit();
+      } else {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Kjo tavoline nuk ekziston! <br> ( This table does not exist! )',
+          text: 'Zgjidhni tavolinen qe jeni ulur.',
+          confirmButtonText: "<i class=\"fa-regular fa-circle-check\"></i>",
+          customClass: {
+            popup: 'table_msg',
+          }
+        });
+      }
+    });
+  });
+</script>
+
+{% endblock %}

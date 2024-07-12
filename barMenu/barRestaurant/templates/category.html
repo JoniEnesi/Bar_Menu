@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div id="body_preloader">
+    <div id="preloader"></div>
+</div>
+
+<div class="container-fluid container_bg">
+    <div class="container_item mt-5 mb-5">
+        <div class="category-head">
+            <a href="{% url 'home' %}"><i class="fa-solid fa-arrow-left"></i></a>
+            {% if language == 'en' %}
+                <h4>{{ object_list.0.category.category_name_en }}</h4>
+            {% else %}
+                <h4>{{ object_list.0.category.category_name_al }}</h4>
+            {% endif %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row" style="margin-right: 0; margin-left: 0;">
+              {% for item in object_list %}
+                <div class="col-12 item">
+                  <div class="desc">
+                    {% if language == 'en' %}
+                      <p>{{ item.title_en }}</p>
+                    {% else %}
+                        <p>{{ item.title_al }}</p>
+                    {% endif %}
+                    <div class="price">
+                      <p class="product-price">{{ item.price_L }}</p><span style="color: #d8860b; font-style: italic; font-weight: bold; margin-right: 30px;">Lek</span><p>{{ item.price_E }}</p><span style="color: #d8860b;font-style: italic;font-weight: bold;">Eur</span>
+                    </div>
+                    <div class="order">
+                        <div class="inside_order">
+                            <p data-lang data-lang-al="Sasia:" data-lang-en="Qty:"></p>
+                            <input type="number" value="1" class="product-quantity product-quantity-{{item.id}}">
+                        </div>
+                        <div class="inside_order">
+                            <input type="hidden" style="width: 100px;" value="{{ item.id }}" class="product-id" name="" id="">
+                            <input type="hidden" style="width: 100px;" value="{{ item.title_al }}" class="product-title-al" name="" id="">
+                            <input type="hidden" style="width: 100px;" value="{{ item.title_en }}" class="product-title-en" name="" id="">
+                            <button type="button" class="add-to-cart-btn" data-lang data-lang-al="Shto porosinë" data-lang-en="Add order"></button>
+                        </div>
+                    </div>
+                  </div>
+                  <img src="{{ item.image.url }}" alt="image" class="product-image">
+                </div>
+              {% endfor %}
+              <div class="col-12 item">
+                  <div class="desc">
+                    <p></p>
+                    <div class="price">
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="frame-display">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/l0NMbZHqMDk?si=zty5FWUWumHS-BVa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/l0NMbZHqMDk?si=zty5FWUWumHS-BVa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/l0NMbZHqMDk?si=zty5FWUWumHS-BVa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+<script>
+
+    var loader = document.getElementById('preloader');
+
+    window.addEventListener('load', function (){
+        loader.style.display = 'none';
+    })
+
+    var body_loader = document.getElementById('body_preloader');
+
+    window.addEventListener('load', function (){
+        body_loader.style.display = 'none';
+    })
+
+</script>
+
+{% endblock %}

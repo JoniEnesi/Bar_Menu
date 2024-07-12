@@ -1,0 +1,64 @@
+<div class="container-fluid container_bg" id="cart-list">
+    <div class="invoice mt-5">
+        <form method="post">
+            {% csrf_token %}
+            <div class="invoice_body">
+                <div class="invoice_head mt-3">
+                    <p style="font-family: 'FontAwesome'; font-size: 30px">BarBar</p>
+                    <p data-lang data-lang-al="Rruga: Hime Kolli" data-lang-en="Hime Kolli street"></p>
+                    <p>NIPT: Qdsf123fdsa</p>
+                    <p>(+355) 69xxxxxxx</p>
+                    <div class="invoice_nr mt-5">
+                        <p data-lang data-lang-al="Fatura numer:" data-lang-en="Invoice number:"></p>
+                        <span style="padding-left: 10px;">123445567</span>
+                    </div>
+                </div>
+                {% for product_id, item in cart_data.items %}
+                    <div class="invoice_products mt-3">
+                        {% if language == 'en' %}
+                            <p>{{ item.title_en }}</p>
+                        {% else %}
+                            <p>{{ item.title_al }}</p>
+                        {% endif %}
+                        <p><input type="number" value="{{ item.qty }}" class="product-qty-{{ product_id }}"></p>
+                        <div class="prod-price">
+                            <p>{% widthratio item.price 1 item.qty %}<span style="font-style: italic">Lek</span></p>
+                            <p><button type="button" style="border: 0; background: none;" class="edit-product"><i class="fa-solid fa-arrows-rotate"></i></button></p>
+                            <p><button type="button" style="border: 0; background: none;" class="delete-product" data-product="{{ product_id }}"><i class="fa-solid fa-trash-can"></i></button></p>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+
+            <div class="total mt-5">
+                <p data-lang data-lang-al="TVSH" data-lang-en="Tax" style="font-size: 14px; font-weight: 600;"></p>
+                <p style="font-size: 14px; font-weight: 600;">20%</p>
+            </div>
+            <div class="total">
+                <p data-lang data-lang-al="Vlera e TVSH" data-lang-en="Tax Value" style="font-size: 14px; font-weight: 600;"></p>
+                <p style="font-size: 14px; font-weight: 600;">{{ tax_value|floatformat:0 }}<span style="font-style: italic; font-size: 14px; font-weight: 600;">Lek</span></p>
+            </div>
+            <div class="total">
+                <p data-lang data-lang-al="Shuma pa TVSH" data-lang-en="Subtotal without Tax" style="font-size: 14px; font-weight: 600;"></p>
+                <p style="font-size: 14px; font-weight: 600;">{{ subtotal_without_tax|floatformat:0 }}<span style="font-style: italic; font-size: 14px; font-weight: 600;">Lek</span></p>
+            </div>
+            
+            <div class="total mt-3">
+                <p data-lang data-lang-al="Shuma" data-lang-en="Total" style="font-weight: bold; font-size: 20px"></p>
+                <p style="font-weight: bold; font-size: 20px">{{ cart_total_amount|floatformat:0 }}<span style="font-style: italic; font-weight: bold; font-size: 20px">Lek</span></p>
+            </div>
+
+            <div class="invoice_btn mt-4">
+                <button type="submit" data-lang data-lang-al="Dergo Porosine" data-lang-en="Send Order"></button>
+            </div>
+
+            <div class="invoice_footer mt-5">
+                <p data-lang data-lang-al="*** Faleminderit ***" data-lang-en="*** Thank you ***" ></p>
+            </div>
+            <div class="invoice_desc">
+                <p style="font-size: 10px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+        </form>
+    </div>
+</div>
